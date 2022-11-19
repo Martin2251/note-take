@@ -1,3 +1,5 @@
+import NoteForm from "./NoteForm"
+
 const NewNote =() => {
     return (
         <>
