@@ -11,13 +11,13 @@ export type Note  = {
 } & NoteData
 
 export type RawNote = {
-  id:string
+  id:string,
 } & RawNoteData
 
 export type RawNoteData = {
   title:string,
   markdown:string,
-  tagsIds: string[]
+  tagIds: string[]
 }
 
  export type NoteData = {
@@ -37,7 +37,7 @@ function App() {
 
   const notesWithTages = useMemo(() => {
     return notes.map(note => {
-      return {...note, tags: tags.filter(tag => note.tagsIds.includes(tag.id))}
+      return {...note, tags: tags.filter(tag => note.tagIds.includes(tag.id))}
     })
   }, [notes, tags])
 
@@ -57,8 +57,8 @@ function App() {
   return (
     <Container className='my-4'>
       <Routes>
-        <Route path="/" element={<h1>Home</h1>} />
-        <Route path="/new" element={<NewNote onSubmit={onCreateNote} onAddTag={addTag} />} />
+        <Route path="/" element={<NoteList />} />
+        <Route path="/new" element={<NewNote onSubmit={onCreateNote} onAddTag={addTag} availableTags={tags} />} />
         <Route path="/:id">
           <Route index element={<h1>Show</h1>} />
           <Route  path="edit" element={<h1>Edit</h1>} />
