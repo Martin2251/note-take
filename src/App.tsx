@@ -8,6 +8,16 @@ export type Note  = {
   id: string
 } & NoteData
 
+export type RawNote = {
+  ID:string
+}
+
+export type RawNoteData = {
+  title:string,
+  markdown:string,
+  tagsIds: string[]
+}
+
  export type NoteData = {
   title:string,
   markdown:string,
@@ -20,7 +30,8 @@ export type Note  = {
 }
 
 function App() {
-  const [notes, setNotes] = useLocalStorage<RawNote[]>("notes", [])
+  const [notes, setNotes] = useLocalStorage<RawNote[]>("NOTES", [])
+  const [tags, setTags] = useLocalStorage<Tag[]>("TAGS", [])
 
   return (
     <Container className='my-4'>
