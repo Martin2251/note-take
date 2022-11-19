@@ -4,6 +4,21 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import NewNote from './NewNote'
 
+type Note  = {
+  id: string
+}
+
+type NoteData = {
+  title:string,
+  markdown:string,
+  tags: Tag[]
+}
+
+type Tag = {
+  id:string,
+  label:string,
+}
+
 function App() {
   const [count, setCount] = useState(0)
 

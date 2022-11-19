@@ -1,13 +1,17 @@
-import { useRef } from "react"
+import { FormEvent, useRef } from "react"
 import { Button, Col, Form, Row, Stack } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import CreateablerReactSelect from "react-select/creatable"
 
-const NoteForm = () => {
+const NoteForm = ({onSubmit}) => {
 const titleRef = useRef<HTMLInputElement>(null)
 const markdownRef = useRef<HTMLTextAreaElement>(null)
 
-return<Form>
+const handleSubmit = (e:FormEvent) => {
+    e.preventDefault()
+}
+
+return<Form onSubmit={handleSubmit}>
 <Stack gap={4}>
    <Row>
        <Col>
