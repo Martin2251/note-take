@@ -38,7 +38,15 @@ return<Form onSubmit={handleSubmit}>
        <Col>
        <Form.Group controlId="tags">
            <Form.Label>Tags</Form.Label>
-           <CreateablerReactSelect isMulti/>
+           <CreateablerReactSelect value ={selectedTags.map(tag =>{
+               return {label: tag.label, value:tag.id}
+           })}
+           onChange={tags => {
+               setSelectedTages(tags.map(tag => {
+                   return {label: tag.label, id:tag.value}
+               }))
+           }}
+           isMulti/>
        </Form.Group>
        </Col>
    </Row>

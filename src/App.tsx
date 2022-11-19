@@ -20,7 +20,7 @@ export type Note  = {
 }
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [notes, setNotes] = useLocalStorage<RawNote[]>("notes", [])
 
   return (
     <Container className='my-4'>
