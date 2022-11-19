@@ -5,6 +5,7 @@ import { Container } from 'react-bootstrap'
 import NewNote from './NewNote'
 import useLocalStorage from './useLocalStorage'
 import {v4 as uuidV4} from "uuid"
+import NoteList from './NoteList'
 
 export type Note  = {
   id: string
