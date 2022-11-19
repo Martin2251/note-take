@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import { NoticeProps } from "react-select"
 import CreateablerReactSelect from "react-select/creatable"
 import { NoteData, Tag } from "./App"
+import {v4 as uuidV4} from "uuid"
 
 type NoteFormProps= {
     onSubmit: (data:NoteData) => void
@@ -38,7 +39,14 @@ return<Form onSubmit={handleSubmit}>
        <Col>
        <Form.Group controlId="tags">
            <Form.Label>Tags</Form.Label>
-           <CreateablerReactSelect value ={selectedTags.map(tag =>{
+           <CreateablerReactSelect 
+           onCreateOption={label => {
+               const newTag = { id:uuidV4(), label}
+               onAddTag(newTag)
+               setSelectedTages(prev => [...prev, newTag])
+           }}
+           
+           value ={selectedTags.map(tag =>{
                return {label: tag.label, value:tag.id}
            })}
            onChange={tags => {
