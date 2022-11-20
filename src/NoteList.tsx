@@ -3,7 +3,7 @@ import { Button, Col, Row, Stack, Form, Card } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import ReactSelect from "react-select"
 import { Note, Tag } from "./App"
-import styles from "./NoteList.modules.css"
+import styles from "./NoteList.module.css"
 
 type NoteListProps = {
     availableTags:Tag[]
