@@ -2,10 +2,15 @@ import { useState } from "react"
 import { Button, Col, Row, Stack, Form } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import ReactSelect from "react-select"
-import { Tag } from "./App"
+import { Note, Tag } from "./App"
 
-const NoteList = ({availableTags,}) => {
+type NoteListProps = {
+    availableTags:Tag[]
+}
+
+const NoteList = ({availableTags}: NoteListProps) => {
     const [selectedTags, setSelectedTages] = useState<Tag[]>([])
+    const [title, setTitle] = useState("")
 return(
    <>
    <Row>
@@ -27,7 +32,7 @@ return(
         <Col>
         <Form.Group controlId="title">
             <Form.Label>Title</Form.Label>
-            <Form.Control type="text"  />
+            <Form.Control type="text" value={title} onChange={e => setTitle(e.target.value)} />
         </Form.Group>
         
         </Col>
