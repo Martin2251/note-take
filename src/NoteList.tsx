@@ -1,12 +1,19 @@
 import { useMemo, useState } from "react"
-import { Button, Col, Row, Stack, Form } from "react-bootstrap"
+import { Button, Col, Row, Stack, Form, Card } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import ReactSelect from "react-select"
 import { Note, Tag } from "./App"
+import styles from "./NoteList.modules.css"
 
 type NoteListProps = {
     availableTags:Tag[]
-    notes:Note[]
+    notes:SimplifiedNote[]
+}
+
+type SimplifiedNote = {
+    tags: Tag[],
+    title:string,
+    id:string
 }
 
 const NoteList = ({availableTags, notes}: NoteListProps) => {
@@ -66,12 +73,16 @@ return(
    <Row xs={1} sm={2} lg={3} xl={4} className="g-3">
        {filteredNotes.map(note => (
            <Col key={note.id}>
-               <NoteCard  />
+               <NoteCard id={note.id}  title={note.title} tags={note.tags}/>
            </Col>
        ))}
    </Row>
    </>
 )
+}
+
+function NoteCard ({id, title,tags}:SimplifiedNote){
+    return<Card as={Link} to={`/${id}`} className={`h-100 text-reset text-decoration-none ${styles.card}`}><Card.Body></Card.Body></Card>
 }
 
 export default NoteList
