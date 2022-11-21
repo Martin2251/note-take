@@ -39,7 +39,7 @@ function App() {
   const [notes, setNotes] = useLocalStorage<RawNote[]>("NOTES", [])
   const [tags, setTags] = useLocalStorage<Tag[]>("TAGS", [])
 
-  const notesWithTages = useMemo(() => {
+  const notesWithTags = useMemo(() => {
     return notes.map(note => {
       return {...note, tags: tags.filter(tag => note.tagIds.includes(tag.id))}
     })
@@ -54,8 +54,16 @@ function App() {
     })
   }
 
-  const onUpdateNote=(id:string, {tags, ...data:NoteData}) => {
-
+  function onUpdateNote(id:string, {tags, ...data:NoteData}) {
+    setNotes(prevNotes => {
+      return prevNotes.map(note => {
+        if (note.id === id) {
+          return { ...note, ...data, tagIds: tags.map(tag => tag.id) }
+        }else {
+          return note
+        }
+      })
+    })
   }
 
   function addTag(tag:Tag){
@@ -65,9 +73,9 @@ function App() {
   return (
     <Container className='my-4'>
       <Routes>
-        <Route path="/" element={<NoteList notes={notesWithTages} availableTags={tags} />} />
+        <Route path="/" element={<NoteList notes={notesWithTags} availableTags={tags} />} />
         <Route path="/new" element={<NewNote onSubmit={onCreateNote} onAddTag={addTag} availableTags={tags} />} />
-        <Route path="/:id" element={<NoteLayout notes={notesWithTages} />}>
+        <Route path="/:id" element={<NoteLayout notes={notesWithTags} />}>
           <Route index element={<Note  />} />
           <Route  path="edit" element={<EditNote onSubmit={onUpdateNote} onAddTag={addTag} availableTags={tags} />} />
 

@@ -15,7 +15,7 @@ type NoteFormProps= {
 const NoteForm = ({onSubmit, onAddTag,availableTags}: NoteFormProps) => {
 const titleRef = useRef<HTMLInputElement>(null)
 const markdownRef = useRef<HTMLTextAreaElement>(null)
-const [selectedTags, setSelectedTages] = useState<Tag[]>([])
+const [selectedTags, setSelectedTags] = useState<Tag[]>([])
 const navigate  = useNavigate()
 const handleSubmit = (e:FormEvent) => {
     e.preventDefault()
@@ -47,7 +47,7 @@ return<Form onSubmit={handleSubmit}>
            onCreateOption={label => {
                const newTag = { id:uuidV4(), label}
                onAddTag(newTag)
-               setSelectedTages(prev => [...prev, newTag])
+               setSelectedTags(prev => [...prev, newTag])
            }}
            
            value ={selectedTags.map(tag =>{
@@ -57,7 +57,7 @@ return<Form onSubmit={handleSubmit}>
                return {label: tag.label, value:tag.id}
            })}
            onChange={tags => {
-               setSelectedTages(tags.map(tag => {
+               setSelectedTags(tags.map(tag => {
                    return {label: tag.label, id:tag.value}
                }))
            }}

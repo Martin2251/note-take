@@ -17,7 +17,7 @@ type SimplifiedNote = {
 };
 
 const NoteList = ({ availableTags, notes }: NoteListProps) => {
-  const [selectedTags, setSelectedTages] = useState<Tag[]>([]);
+  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
   const [title, setTitle] = useState("");
 
   const filteredNotes = useMemo(() => {
@@ -70,7 +70,7 @@ const NoteList = ({ availableTags, notes }: NoteListProps) => {
                   return { label: tag.label, value: tag.id };
                 })}
                 onChange={(tags) => {
-                  setSelectedTages(
+                  setSelectedTags(
                     tags.map((tag) => {
                       return { label: tag.label, id: tag.value };
                     })
