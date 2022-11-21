@@ -54,6 +54,10 @@ function App() {
     })
   }
 
+  const onUpdateNote=(id:string, {tags, ...data:NoteData}) => {
+
+  }
+
   function addTag(tag:Tag){
     setTags(prev => [...prev, tag])
   }
@@ -65,7 +69,7 @@ function App() {
         <Route path="/new" element={<NewNote onSubmit={onCreateNote} onAddTag={addTag} availableTags={tags} />} />
         <Route path="/:id" element={<NoteLayout notes={notesWithTages} />}>
           <Route index element={<Note  />} />
-          <Route  path="edit" element={<EditNote  />} />
+          <Route  path="edit" element={<EditNote onSubmit={onUpdateNote} onAddTag={addTag} availableTags={tags} />} />
 
         </Route>
         <Route path="*" element={<Navigate to="/"/>} />
